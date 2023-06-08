@@ -4,13 +4,14 @@ import ReactDOM from 'react-dom/client'
 require('bootstrap/dist/js/bootstrap')
 
 import './styles/app.scss'
-import Home from './pages/Home'
+
+import App from './App'
 import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <Home />
+    <App />
   </React.StrictMode>,
 )
 
