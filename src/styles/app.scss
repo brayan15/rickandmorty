@@ -9,3 +9,9 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+// Import local styles
+@import './components/';
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
