@@ -1,0 +1,24 @@
+.card {
+  cursor: pointer;
+  background: white;
+  transition: all 0.2s ease-in-out;
+  box-shadow: -2px 3px 10px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .card-title {
+    height: 100%;
+    line-clamp: 1;
+    overflow: hidden;
+    max-height: 21px;
+    -ms-line-clamp: 1;
+    -moz-line-clamp: 1;
+    display: -webkit-box;
+    box-orient: vertical;
+    -webkit-line-clamp: 1;
+    -ms-box-orient: vertical;
+    -webkit-box-orient: vertical;
+  }
+}

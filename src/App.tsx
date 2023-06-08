@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Home from './pages/Home'
-import Nav from './components/Nav'
+import Home from 'src/pages/Home'
+import Nav from 'src/components/Nav'
 
 export default function App(): React.JSX.Element {
   return (
