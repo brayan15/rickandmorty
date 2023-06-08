@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
-type SearchT = {
-  onClick: (name: string) => void
-}
+import { setSearchTerm } from 'src/store/App/reducer'
 
-const Search: FunctionComponent<SearchT> = ({ onClick }) => {
+const Search: FunctionComponent = () => {
+  const dispatch = useDispatch()
   const [name, setName] = useState<string>('')
 
   const onInputChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -12,7 +12,7 @@ const Search: FunctionComponent<SearchT> = ({ onClick }) => {
   }
 
   const onSearch = () => {
-    onClick(name)
+    dispatch(setSearchTerm(name))
   }
 
   return (

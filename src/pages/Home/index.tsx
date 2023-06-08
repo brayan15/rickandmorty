@@ -1,23 +1,21 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, { FunctionComponent, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import ReactPaginate from 'react-paginate'
 
 import Loader from 'src/components/Loader'
 import Search from 'src/components/Search'
 import CardItem from 'src/components/CardItem'
+import { searchTemrSelector } from 'src/store/App/selectors'
 import useGetCharactersPaginated from 'src/hooks/useGetCharacters'
 
 const Home: FunctionComponent = () => {
+  const name = useSelector(searchTemrSelector)
   const { isLoading, characters, pages, getCharacters } = useGetCharactersPaginated()
-  const [name, setName] = useState<string>('')
 
   const shouldShow = !isLoading && characters
 
   const changePage = ({ selected }: { selected: number }) => {
     void getCharacters(selected + 1, name)
-  }
-
-  const searchByName = (character: string) => {
-    setName(character)
   }
 
   useEffect(() => {
@@ -32,7 +30,7 @@ const Home: FunctionComponent = () => {
             <h3>Recently viewed</h3>
           </div>
           <div className="col-12 col-sm-8">
-            <Search onClick={searchByName} />
+            <Search />
             {isLoading && <Loader />}
             {shouldShow && !characters.length && <p>There is nothing here</p>}
             <div className="row row-cols-2 row-cols-xl-4 g-4">
