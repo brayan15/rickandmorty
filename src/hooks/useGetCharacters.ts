@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { CharacterT } from 'src/types'
 import apiRestClient from 'src/service/api'
@@ -27,6 +27,10 @@ const useGetCharactersPaginated = (name = ''): UseGetCharactersPaginatedT => {
     } finally {
       setIsLoading(false)
     }
+  }, [page, name])
+
+  useEffect(() => {
+    void getCharacters()
   }, [page, name])
 
   return {

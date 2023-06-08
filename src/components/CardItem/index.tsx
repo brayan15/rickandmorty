@@ -1,23 +1,21 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 
-const CardItem = (): React.JSX.Element => (
+import { CharacterT } from 'src/types'
+
+const CardItem: FunctionComponent<{ character: CharacterT }> = ({ character }) => (
   <div className="col">
     <div className="card h-100">
-      <img
-        alt="Rick Sanchez"
-        className="card-img-top"
-        src="https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-      />
+      <img alt={character.name} className="card-img-top" src={character.image} />
       <div className="card-body">
-        <h5 className="card-title">Rick Sanchez</h5>
+        <h5 className="card-title">{character.name}</h5>
         <p className="cadr-caption mb-0">
-          <strong>Status:</strong> Alive
+          <strong>Status:</strong> {character.status}
         </p>
         <p className="cadr-caption mb-0">
-          <strong>Spice:</strong> Human
+          <strong>Specie:</strong> {character.species}
         </p>
         <p className="cadr-caption mb-0">
-          <strong>Gender:</strong> Male
+          <strong>Gender:</strong> {character.gender}
         </p>
       </div>
     </div>
