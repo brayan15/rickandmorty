@@ -5,7 +5,7 @@ const Nav = (): React.JSX.Element => (
     <div className="container">
       <div className="container-fluid">
         <a className="navbar-brand text-white" href="/">
-          Rick&Morty
+          Rick & Morty
         </a>
       </div>
     </div>
