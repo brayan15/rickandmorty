@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 
-const Loader = (): React.JSX.Element => (
+const Loader: FunctionComponent = () => (
   <div className="d-flex justify-content-center mb-4">
     <div className="spinner-border" role="status">
       <span className="visually-hidden">Loading...</span>

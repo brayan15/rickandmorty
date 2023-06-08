@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 
 import Loader from 'src/components/Loader'
@@ -6,12 +6,23 @@ import Search from 'src/components/Search'
 import CardItem from 'src/components/CardItem'
 import useGetCharactersPaginated from 'src/hooks/useGetCharacters'
 
-const Home = (): React.JSX.Element => {
-  const { isLoading, characters, setPage } = useGetCharactersPaginated()
+const Home: FunctionComponent = () => {
+  const { isLoading, characters, pages, getCharacters } = useGetCharactersPaginated()
+  const [name, setName] = useState<string>('')
+
+  const shouldShow = !isLoading && characters
 
   const changePage = ({ selected }: { selected: number }) => {
-    setPage(selected + 1)
+    void getCharacters(selected + 1, name)
   }
+
+  const searchByName = (character: string) => {
+    setName(character)
+  }
+
+  useEffect(() => {
+    void getCharacters(1, name)
+  }, [name])
 
   return (
     <div className="home">
@@ -21,11 +32,11 @@ const Home = (): React.JSX.Element => {
             <h3>Recently viewed</h3>
           </div>
           <div className="col-12 col-sm-8">
-            <Search />
+            <Search onClick={searchByName} />
             {isLoading && <Loader />}
+            {shouldShow && !characters.length && <p>There is nothing here</p>}
             <div className="row row-cols-2 row-cols-xl-4 g-4">
-              {!isLoading &&
-                characters &&
+              {shouldShow &&
                 characters.map((character) => (
                   <CardItem character={character} key={character.id} />
                 ))}
@@ -35,7 +46,7 @@ const Home = (): React.JSX.Element => {
         <div className="d-flex justify-content-center">
           <nav aria-label="Page navigation example" className="mt-4">
             <ReactPaginate
-              pageCount={42}
+              pageCount={pages}
               pageRangeDisplayed={5}
               activeClassName="active"
               onPageChange={changePage}
