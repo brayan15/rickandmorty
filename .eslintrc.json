@@ -4,6 +4,7 @@
     "es2021": true
   },
   "extends": [
+    "plugin:import/recommended",
     "plugin:react/recommended",
     "airbnb-typescript",
     "plugin:@typescript-eslint/recommended",
@@ -20,6 +21,11 @@
     "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
     "no-unused-vars": "error",
     "no-console": ["error"],
@@ -30,8 +36,8 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": ["**/*.stories.*", "**/.storybook/**/*.*"],
-        "peerDependencies": true
+        "devDependencies": true,
+        "peerDependencies": false
       }
     ],
     "@typescript-eslint/no-misused-promises": [
