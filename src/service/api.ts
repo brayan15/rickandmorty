@@ -1,8 +1,9 @@
 import axios from 'axios'
 
-import { PaginatedResponseT, CharacterT, ServiceResponseT, QueryParamT } from 'src/types'
+import { PaginatedResponseT, CharacterT, ServiceResponseT, QueryParamT, LocationT } from 'src/types'
 
 type ApiRestClientT = {
+  getLocationById: (id: string) => ServiceResponseT<LocationT>
   getCharacterById: (id: string) => ServiceResponseT<CharacterT>
   getCharacters: (params: QueryParamT) => ServiceResponseT<PaginatedResponseT<CharacterT>>
 }
@@ -22,8 +23,13 @@ const apiRestClient = (): ApiRestClientT => {
     return api.get(`character/${id}`)
   }
 
+  const getLocationById = async (id: string): ServiceResponseT<LocationT> => {
+    return api.get(`location/${id}`)
+  }
+
   return {
     getCharacters,
+    getLocationById,
     getCharacterById,
   }
 }
