@@ -1,27 +1,33 @@
-import React, { FunctionComponent, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { FunctionComponent, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { setSearchTerm } from 'src/store/App/reducer'
+import { searchTemrSelector } from 'src/store/App/selectors'
 
 const Search: FunctionComponent = () => {
   const dispatch = useDispatch()
-  const [name, setName] = useState<string>('')
+  const searchTerm = useSelector(searchTemrSelector)
+  const [characterName, setcharacterName] = useState<string>('')
 
   const onInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-    setName(event.currentTarget.value)
+    setcharacterName(event.currentTarget.value)
   }
 
   const onSearch = () => {
-    dispatch(setSearchTerm(name))
+    dispatch(setSearchTerm(characterName))
   }
+
+  useEffect(() => {
+    if (searchTerm) setcharacterName(searchTerm)
+  }, [])
 
   return (
     <div className="search-character d-flex mb-3">
       <div className="form-floating w-100 me-4">
         <input
-          value={name}
           type="text"
           id="floatingInput"
+          value={characterName}
           className="form-control"
           onChange={onInputChange}
           placeholder="Search by Name"

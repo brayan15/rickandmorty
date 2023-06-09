@@ -9,18 +9,18 @@ import { searchTemrSelector } from 'src/store/App/selectors'
 import useGetCharactersPaginated from 'src/hooks/useGetCharacters'
 
 const Home: FunctionComponent = () => {
-  const name = useSelector(searchTemrSelector)
+  const searchTerm = useSelector(searchTemrSelector)
   const { isLoading, characters, pages, getCharacters } = useGetCharactersPaginated()
 
   const shouldShow = !isLoading && characters
 
   const changePage = ({ selected }: { selected: number }) => {
-    void getCharacters(selected + 1, name)
+    void getCharacters(selected + 1, searchTerm)
   }
 
   useEffect(() => {
-    void getCharacters(1, name)
-  }, [name])
+    void getCharacters(1, searchTerm)
+  }, [searchTerm])
 
   return (
     <div className="home">
