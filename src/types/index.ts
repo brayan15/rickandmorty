@@ -5,6 +5,16 @@ export type CharacterExtraT = {
   url: string
 }
 
+export type LocationT = {
+  id: number
+  url: string
+  name: string
+  type: string
+  created: string
+  dimension: string
+  residents: string[]
+}
+
 export type CharacterT = {
   id: number
   url: string

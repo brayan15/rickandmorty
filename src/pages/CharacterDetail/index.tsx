@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import Loader from 'src/components/Loader'
 
+import Loader from 'src/components/Loader'
 import useGetCharacterById from 'src/hooks/useGetCharacterById'
 
 const CharacterDetail: FunctionComponent = () => {
@@ -11,6 +11,13 @@ const CharacterDetail: FunctionComponent = () => {
   useEffect(() => {
     if (id) void getCharacterById(id)
   }, [id])
+
+  useEffect(() => {
+    if (character) {
+      //const originId = character.origin.url.split('/').reverse()[0]
+      //const locationId = character.location.url.split('/').reverse()[0]
+    }
+  }, [character])
 
   return (
     <div>
