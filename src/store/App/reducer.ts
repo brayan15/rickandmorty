@@ -23,7 +23,12 @@ export const appSlide = createSlice({
     }),
     addRecentlyViewed: (state, action: PayloadAction<CharacterT>) => ({
       ...state,
-      recentlyViewed: [action.payload, ...state.recentlyViewed.slice(0, 4)],
+      recentlyViewed: [
+        action.payload,
+        ...state.recentlyViewed
+          .filter((character: CharacterT) => character.id != action.payload.id)
+          .slice(0, 4),
+      ],
     }),
   },
 })

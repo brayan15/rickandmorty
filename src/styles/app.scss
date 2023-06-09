@@ -14,6 +14,10 @@ code {
   min-height: calc(100vh - 136px);
 }
 
+.recently {
+  box-shadow: -2px 3px 10px rgba(0, 0, 0, 0.25);
+}
+
 // Import local styles
 @import './components/';
 

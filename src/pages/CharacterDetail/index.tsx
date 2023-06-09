@@ -1,12 +1,18 @@
 import React, { FunctionComponent, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import Loader from 'src/components/Loader'
+import { addRecentlyViewed } from 'src/store/App/reducer'
+import useGetLocationById from 'src/hooks/useGetLocationById'
 import useGetCharacterById from 'src/hooks/useGetCharacterById'
 
 const CharacterDetail: FunctionComponent = () => {
   const { id } = useParams()
+  const dispatch = useDispatch()
   const { isLoading, character, getCharacterById } = useGetCharacterById()
+  const { location, getLocationById } = useGetLocationById()
+  const { location: origin, getLocationById: getOriginById } = useGetLocationById()
 
   useEffect(() => {
     if (id) void getCharacterById(id)
@@ -14,8 +20,14 @@ const CharacterDetail: FunctionComponent = () => {
 
   useEffect(() => {
     if (character) {
-      //const originId = character.origin.url.split('/').reverse()[0]
-      //const locationId = character.location.url.split('/').reverse()[0]
+      const originId = character.origin.url.split('/').reverse()[0]
+      const locationId = character.location.url.split('/').reverse()[0]
+
+      if (originId) void getOriginById(originId)
+
+      if (locationId) void getLocationById(locationId)
+
+      dispatch(addRecentlyViewed(character))
     }
   }, [character])
 
@@ -45,10 +57,14 @@ const CharacterDetail: FunctionComponent = () => {
                   <strong>Type:</strong> {character.type || 'Unknown'}
                 </p>
                 <p className="card-caption mb-0">
-                  <strong>Origin:</strong> {character.origin.name}
+                  <strong>Origin:</strong>{' '}
+                  {origin ? `${origin.name}, ${origin.type}, ${origin.dimension}` : 'Unknown'}
                 </p>
                 <p className="card-caption mb-0">
-                  <strong>Location:</strong> {character.location.name}
+                  <strong>Location:</strong>{' '}
+                  {location
+                    ? `${location.name}, ${location.type}, ${location.dimension}`
+                    : 'Unknown'}
                 </p>
               </div>
             </div>

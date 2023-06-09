@@ -5,6 +5,7 @@ import ReactPaginate from 'react-paginate'
 import Loader from 'src/components/Loader'
 import Search from 'src/components/Search'
 import CardItem from 'src/components/CardItem'
+import RecentlyViewed from 'src/components/RecentlyViewed'
 import { searchTemrSelector } from 'src/store/App/selectors'
 import useGetCharactersPaginated from 'src/hooks/useGetCharacters'
 
@@ -27,7 +28,7 @@ const Home: FunctionComponent = () => {
       <div className="container">
         <div className="row">
           <div className="col-12 col-sm-4 order-sm-1">
-            <h3>Recently viewed</h3>
+            <RecentlyViewed />
           </div>
           <div className="col-12 col-sm-8">
             <Search />
